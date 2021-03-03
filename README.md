@@ -1,6 +1,6 @@
 # VBA_challenge
 #
-#  Dan Cusick
+#  Dan C.
 #  Data Scienct Bootcamp
 #  3/2/2021
 #
