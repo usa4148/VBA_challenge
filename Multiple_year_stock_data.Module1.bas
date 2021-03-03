@@ -14,6 +14,9 @@ Sub vbaofwallstreet()
    Dim percentchange As Double
    Dim volume As Double
    
+   Dim rg As Range
+   Dim green As FormatCondition, red As FormatCondition
+   
    Dim biggestwinner As String
    Dim biggestwinnernum As Double
    Dim biggestloser As String
@@ -118,10 +121,10 @@ Sub vbaofwallstreet()
      ws.Cells(4, "O").Value = "Greatest Total Volume"
 
      ws.Cells(2, "P").Value = biggestwinner
-     ws.Cells(2, "Q").Value = Format(biggestwinnernum, "#,##0.00%")
+     ws.Cells(2, "Q").Value = Format(biggestwinnernum, "#,##0.00")
 
      ws.Cells(3, "P").Value = biggestloser
-     ws.Cells(3, "Q").Value = Format(biggestlosernum, "#,##0.00%")
+     ws.Cells(3, "Q").Value = Format(biggestlosernum, "#,##0.00")
 
      ws.Cells(4, "P").Value = largestvolume
      ws.Cells(4, "Q").Value = largestvolumenum
@@ -134,10 +137,31 @@ Sub vbaofwallstreet()
 
 
    Next ws  '# Step to next sheet
+   
+   For Each ws In Worksheets
+   
+   '# Format the Yearly Change for win/lose
+     ws.Activate
+     Set rg = Range("J2", Range("J2").End(xlDown))
+     Set red = rg.FormatConditions.Add(xlCellValue, xlLess, 0)
+     Set green = rg.FormatConditions.Add(xlCellValue, xlGreater, 0)
+     
+     With red '# Losers first
+       .Interior.Color = vbRed
+     End With
+     
+     With green '# Next Winners
+       .Interior.Color = vbGreen
+     End With
+     ws.Columns("I:L").AutoFit
+   Next ws
 
- 
+
+   '# Handy ditty this debug.print ditty to immediate window!
    '# Debug.Print "Greatest % Decrease ", biggestloser, " ", biggestlosernum
    '# Debug.Print "Greatest Total Volume", largestvolume, " ", largestvolumenum
 
 End Sub
+
+
 

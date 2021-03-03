@@ -1,5 +1,9 @@
 # VBA_challenge
-
+#
+#  Dan Cusick
+#  Data Scienct Bootcamp
+#  3/2/2021
+#
 Multi-year Stock Portfolio Analysis
 
 For each stock - Identifying:
